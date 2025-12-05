@@ -2,38 +2,40 @@ package days.day03;
 
 import core.Solver;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
 
 public class Lobby implements Solver {
+    private long maxJoltageForLine(String line, int k) {
+        int n = line.length();
+        Deque<Character> stack = new ArrayDeque<>();
+        int toRemove = n - k;
+
+        for (char c : line.toCharArray()) {
+            while (!stack.isEmpty() && toRemove > 0 && stack.peekLast() < c) {
+                stack.pollLast();
+                toRemove--;
+            }
+            stack.addLast(c);
+        }
+
+        while (stack.size() > k) {
+            stack.pollLast();
+        }
+
+        StringBuilder sb = new StringBuilder(k);
+        for (char c : stack) sb.append(c);
+
+        return Long.parseLong(sb.toString());
+    }
+
     @Override
     public long solveSilver(List<String> input) {
         long joltage = 0;
 
         for (String line : input) {
-            int n = line.length();
-
-            int[] maxRight = new int[n];
-            int currMax = 0;
-
-            for (int i = n - 1; i >= 0; i--) {
-                int d = line.charAt(i) - '0';
-                currMax = Math.max(currMax, d);
-                maxRight[i] = currMax;
-            }
-
-            int best = 0;
-
-            for (int i = 0; i < n - 1; i++) {
-                int left = line.charAt(i) - '0';
-                int right = maxRight[i + 1];
-
-                int candidate = left * 10 + right;
-                if (candidate > best) best = candidate;
-
-                if (best == 99) break;
-            }
-
-            joltage += best;
+            joltage += maxJoltageForLine(line, 2);
         }
 
         return joltage;
@@ -41,6 +43,12 @@ public class Lobby implements Solver {
 
     @Override
     public long solveGold(List<String> input) {
-        return 0;
+        long joltage = 0;
+
+        for (String line : input) {
+            joltage += maxJoltageForLine(line, 12);
+        }
+
+        return joltage;
     }
 }
