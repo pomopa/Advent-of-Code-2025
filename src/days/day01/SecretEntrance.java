@@ -1,13 +1,10 @@
+package days.day01;
+
+import core.Solver;
 import java.util.List;
 
-public class SecretEntrance {
-    public static int find_password(boolean method_0x, boolean test_file) {
-        String path = test_file ?
-                "Datasets/Day1_SecretEntrance_test.txt" :
-                "Datasets/Day1_SecretEntrance.txt";
-
-        List<String> lines = InputReader.readLines(path);
-
+public class SecretEntrance implements Solver {
+    private static int find_password(boolean method_0x, List<String> lines) {
         int dial = 50;
         int countZerosP1 = 0;
         int countZerosP2 = 0;
@@ -37,5 +34,15 @@ public class SecretEntrance {
         }
 
         return method_0x ? countZerosP1 : countZerosP2;
+    }
+
+    @Override
+    public long solveSilver(List<String> input) {
+        return find_password(false, input);
+    }
+
+    @Override
+    public long solveGold(List<String> input) {
+        return find_password(true, input);
     }
 }
