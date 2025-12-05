@@ -61,11 +61,13 @@ I aim to provide elegant, well-structured code and useful utilities that allow e
 
 ## 📅 Progress Tracker
 | Day |	Silver | Gold |
-|-----|--------|------|
-| 01	| ✅ |	✅ |
-| 02	| ✅ |	✅ |
-| 03	| ✅ |	✅ |
-| 04 |	⏳ |	⏳ |
+|-----|------|------|
+| 01	 | ✅ |	✅ |
+| 02	 | ✅ |	✅ |
+| 03	 | ✅ |	✅ |
+| 04  |	✅ |	⏳ |
+| 05  |	⏳ |	⏳ |
+| 06  |	⏳ |	⏳ |
 
 ---
 
