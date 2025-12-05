@@ -2,6 +2,7 @@ package days.day02;
 
 import core.Solver;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,8 +24,22 @@ public class GiftShop implements Solver {
 
     @Override
     public long solveSilver(List<String> input) {
-        List<String> values = getValues(input.get(0));
-        return 0;
+        long sum = 0;
+        List<String> ranges = getValues(input.get(0));
+
+        for (String range : ranges) {
+            String[] bounds = range.split("-");
+            long start = Long.parseLong(bounds[0]);
+            long end = Long.parseLong(bounds[1]);
+
+            for (long id = start; id <= end; id++) {
+                if (isRepeatedSequence(id)) {
+                    sum += id;
+                }
+            }
+        }
+
+        return sum;
     }
 
     @Override
