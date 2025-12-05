@@ -1,14 +1,23 @@
+import java.util.List;
+
 public class SecretEntrance {
-    private int count_zeros;
-    private int dial;
+    public static int find_password() {
+        List<String> lines = InputReader.readLines("Datasets/Day1_SecretEntrance.txt");
 
-    public SecretEntrance() {
-        this.count_zeros = 0;
-        this.dial = 0;
-    }
+        int dial = 50;
+        int countZeros = 0;
 
-    public int find_password() {
+        for (String line : lines) {
+            int value = Integer.parseInt(line.substring(1));
+            int direction = (line.charAt(0) == 'L') ? -1 : 1;
 
-        return this.count_zeros;
+            dial = (dial + direction * value + 100) % 100;
+
+            if (dial == 0) {
+                countZeros++;
+            }
+        }
+
+        return countZeros;
     }
 }
