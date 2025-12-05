@@ -2,7 +2,6 @@ package days.day02;
 
 import core.Solver;
 
-import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,7 +12,21 @@ public class GiftShop implements Solver {
                 .toList();
     }
 
-    private boolean isRepeatedSequence(long n) {
+    private boolean isRepeatedSequenceMultiple(long n) {
+        String s = Long.toString(n);
+        int len = s.length();
+        for (int i = 1; i <= len / 2; i++) {
+            if (len % i != 0) continue;
+            String pattern = s.substring(0, i);
+            StringBuilder sb = new StringBuilder();
+            int times = len / i;
+            sb.append(pattern.repeat(times));
+            if (sb.toString().equals(s)) return true;
+        }
+        return false;
+    }
+
+    private boolean isRepeatedSequenceTwice(long n) {
         String s = Long.toString(n);
         int len = s.length();
         if (len % 2 != 0) return false;
@@ -33,7 +46,7 @@ public class GiftShop implements Solver {
             long end = Long.parseLong(bounds[1]);
 
             for (long id = start; id <= end; id++) {
-                if (isRepeatedSequence(id)) {
+                if (isRepeatedSequenceTwice(id)) {
                     sum += id;
                 }
             }
@@ -44,6 +57,21 @@ public class GiftShop implements Solver {
 
     @Override
     public long solveGold(List<String> input) {
-        return 0;
+        long sum = 0;
+        List<String> ranges = getValues(input.get(0));
+
+        for (String range : ranges) {
+            String[] bounds = range.split("-");
+            long start = Long.parseLong(bounds[0]);
+            long end = Long.parseLong(bounds[1]);
+
+            for (long id = start; id <= end; id++) {
+                if (isRepeatedSequenceMultiple(id)) {
+                    sum += id;
+                }
+            }
+        }
+
+        return sum;
     }
 }
