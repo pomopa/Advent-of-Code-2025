@@ -1,7 +1,7 @@
 # 🎄 Advent of Code 2025 🎅🏻
 ### Author: Pol Monné Parera
 
-Welcome to my **Advent of Code 2025** repository!  
+Welcome to my [Advent of Code 2025](https://adventofcode.com) repository!  
 This project contains my personal solutions for each day's coding challenge, written with clarity, modularity, and scalability in mind.
 
 I aim to provide elegant, well-structured code and useful utilities that allow each puzzle to be solved cleanly and consistently.
