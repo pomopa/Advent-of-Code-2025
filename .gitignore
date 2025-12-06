@@ -31,3 +31,4 @@ bin/
 # IntelliJ IDEA
 .idea/
 *.iml
+*.txt

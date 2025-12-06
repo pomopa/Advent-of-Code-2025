@@ -46,6 +46,7 @@ I aim to provide elegant, well-structured code and useful utilities that allow e
   - Selecting test or real dataset  
   - Choosing silver or gold puzzle
 - A general-purpose **solver interface** ensures consistency across all days.
+- Advent of Code is free to use, not free to copy. Therefore, no puzzle inputs are provided in this repository.
 
 ---
 
