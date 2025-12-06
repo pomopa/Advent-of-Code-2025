@@ -66,7 +66,7 @@ I aim to provide elegant, well-structured code and useful utilities that allow e
 | 02	 | ✅ |	✅ |
 | 03	 | ✅ |	✅ |
 | 04  |	✅ |	✅ |
-| 05  |	⏳ |	⏳ |
+| 05  |	✅ |	✅ |
 | 06  |	⏳ |	⏳ |
 
 ---
