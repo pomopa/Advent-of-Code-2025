@@ -86,6 +86,17 @@ public class Cafeteria implements Solver {
 
     @Override
     public long solveGold(List<String> input) {
-        return 0;
+        ParsedInput parsed = parseInput(input);
+        List<long[]> ranges = parsed.ranges;
+
+        List<long[]> merged = mergeRanges(ranges);
+
+        long count = 0;
+
+        for (long[] range : merged) {
+            count += range[1] - range[0] + 1;
+        }
+
+        return count;
     }
 }
