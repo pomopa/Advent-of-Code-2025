@@ -72,11 +72,9 @@ public class Laboratories implements Solver {
 
                 if (cell == '.') {
                     nextCounts[x] += c;
-                } else if (cell == '^') {
+                } else {
                     if (x - 1 >= 0) nextCounts[x - 1] += c;
                     if (x + 1 < cols) nextCounts[x + 1] += c;
-                } else {
-                    nextCounts[x] += c;
                 }
             }
 
