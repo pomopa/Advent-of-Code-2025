@@ -55,6 +55,37 @@ public class Laboratories implements Solver {
 
     @Override
     public long solveGold(List<String> input) {
-        return 0;
+        int rows = input.size();
+        int cols = input.get(0).length();
+        long[] counts = new long[cols];
+        counts[input.get(0).length() / 2] = 1;
+
+        for (int r = 1; r < rows; r++) {
+            long[] nextCounts = new long[cols];
+            String line = input.get(r);
+
+            for (int x = 0; x < cols; x++) {
+                long c = counts[x];
+                if (c == 0) continue;
+
+                char cell = line.charAt(x);
+
+                if (cell == '.') {
+                    nextCounts[x] += c;
+                } else if (cell == '^') {
+                    if (x - 1 >= 0) nextCounts[x - 1] += c;
+                    if (x + 1 < cols) nextCounts[x + 1] += c;
+                } else {
+                    nextCounts[x] += c;
+                }
+            }
+
+            counts = nextCounts;
+        }
+
+        long totalTimelines = 0;
+        for (long c : counts) totalTimelines += c;
+        return totalTimelines;
     }
+
 }
