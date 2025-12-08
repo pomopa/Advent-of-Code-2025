@@ -71,7 +71,7 @@ I aim to provide elegant, well-structured code and useful utilities that allow e
 | 05  | 	✅      |	✅ |
 | 06  | 	✅      |	✅ |
 | 07  | 	✅      |	✅ |
-| 08  | 	⏳      |	⏳ |
+| 08  | 	✅      |	✅ |
 | 09  | 	⏳      |	⏳ |
 | 10  | 	⏳      |	⏳ |
 | 11  | 	⏳      |	⏳ |
