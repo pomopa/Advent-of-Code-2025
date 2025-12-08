@@ -21,7 +21,8 @@ I aim to provide elegant, well-structured code and useful utilities that allow e
     ├── core
     │   ├── InputReader.java
     │   ├── Solver.java
-    │   └── SolverRegistry.java
+    │   ├── SolverRegistry.java
+    │   └── TimeLogger.java
     ├── days
     │   ├── day01
     │   │   ├── Day01Input.txt
