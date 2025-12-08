@@ -5,9 +5,9 @@ import core.Solver;
 import java.util.*;
 
 public class Playground implements Solver {
-    @Override
-    public long solveSilver(List<String> input) {
-        record Point(int x, int y, int z) {}
+    private record Point(int x, int y, int z) {}
+
+    private Point[] parsePoints(List<String> input) {
         int n = input.size();
         Point[] pts = new Point[n];
 
@@ -19,8 +19,13 @@ public class Playground implements Solver {
                     Integer.parseInt(p[2])
             );
         }
+        return pts;
+    }
 
+    private List<long[]> computeSortedPairs(Point[] pts) {
+        int n = pts.length;
         List<long[]> pairs = new ArrayList<>();
+
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
                 long dx = pts[i].x - pts[j].x;
@@ -32,6 +37,14 @@ public class Playground implements Solver {
         }
 
         pairs.sort(Comparator.comparingLong(a -> a[0]));
+        return pairs;
+    }
+
+    @Override
+    public long solveSilver(List<String> input) {
+        Point[] pts = parsePoints(input);
+        List<long[]> pairs = computeSortedPairs(pts);
+        int n = pts.length;
         DSU dsu = new DSU(n);
         int K = 1000; // Modify this value for the test case to 10
         int used = 0;
@@ -60,9 +73,32 @@ public class Playground implements Solver {
         return a * b * c;
     }
 
-
     @Override
     public long solveGold(List<String> input) {
+        Point[] pts = parsePoints(input);
+        List<long[]> pairs = computeSortedPairs(pts);
+        int n = pts.length;
+        DSU dsu = new DSU(n);
+        int components = n;
+
+        for (long[] p : pairs) {
+            int a = (int)p[1];
+            int b = (int)p[2];
+
+            int ra = dsu.find(a);
+            int rb = dsu.find(b);
+
+            if (ra != rb) {
+                dsu.union(ra, rb);
+                components--;
+
+                if (components == 1) {
+                    return (long)pts[a].x * pts[b].x;
+                }
+            }
+        }
+
         return 0;
     }
+
 }
