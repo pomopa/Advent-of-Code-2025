@@ -2,24 +2,92 @@ package days.day10;
 
 import core.Solver;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+// Must import into the project Ojango 56.1.1
+import org.ojalgo.optimisation.ExpressionsBasedModel;
+import org.ojalgo.optimisation.Variable;
+import org.ojalgo.optimisation.Expression;
+import org.ojalgo.optimisation.Optimisation;
 
 public class Factory implements Solver {
+
     @Override
     public long solveSilver(List<String> input) {
         long sum = 0;
-        for (String line : input) sum += solveMachine(line);
+        for (String line : input) sum += solveMachineLights(line);
         return sum;
     }
 
     @Override
     public long solveGold(List<String> input) {
-        return 0;
+        long sum = 0;
+        for (String line : input) sum += solveMachineJoltage(line);
+        return sum;
     }
 
-    private int solveMachine(String line) {
+    private long solveMachineJoltage(String line) {
+        int cb = line.indexOf('{');
+        int ce = line.indexOf('}');
+        String[] ts = line.substring(cb + 1, ce).split(",");
+        int n = ts.length;
+        long[] target = new long[n];
+        for (int i = 0; i < n; i++) target[i] = Long.parseLong(ts[i].trim());
+
+        List<int[]> buttons = new ArrayList<>();
+        Matcher m = Pattern.compile("\\(([^)]*)\\)").matcher(line);
+        while (m.find()) {
+            String s = m.group(1).trim();
+            if (s.isEmpty()) {
+                buttons.add(new int[0]);
+            } else {
+                String[] parts = s.split(",");
+                int[] arr = new int[parts.length];
+                for (int i = 0; i < parts.length; i++) {
+                    arr[i] = Integer.parseInt(parts[i].trim());
+                }
+                buttons.add(arr);
+            }
+        }
+        int mcols = buttons.size();
+
+        ExpressionsBasedModel model = new ExpressionsBasedModel();
+        Variable[] x = new Variable[mcols];
+        for (int j = 0; j < mcols; j++) {
+            x[j] = model.addVariable("b" + j).lower(0).integer(true);
+        }
+
+        for (int i = 0; i < n; i++) {
+            Expression expr = model.addExpression("c" + i).level(target[i]);
+            for (int j = 0; j < mcols; j++) {
+                int[] btn = buttons.get(j);
+                int coeff = 0;
+                for (int p : btn) if (p == i) coeff++;
+                if (coeff != 0) expr.set(x[j], coeff);
+            }
+        }
+
+        Expression obj = model.addExpression("objective");
+        for (int j = 0; j < mcols; j++) {
+            obj.set(x[j], 1);
+        }
+        obj.weight(1.0);
+
+        Optimisation.Result res = model.minimise();
+        if (!res.getState().isOptimal()) return -1L;
+
+        long totalPresses = 0;
+        for (int j = 0; j < mcols; j++) {
+            int idx = model.indexOf(x[j]);
+            long v = Math.round(res.doubleValue(idx));
+            totalPresses += v;
+        }
+        return totalPresses;
+    }
+
+    private int solveMachineLights(String line) {
         int lb = line.indexOf('[');
         int rb = line.indexOf(']');
         String lights = line.substring(lb + 1, rb);
@@ -140,5 +208,4 @@ public class Factory implements Solver {
 
         return best;
     }
-
 }
