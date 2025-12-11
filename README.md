@@ -73,7 +73,7 @@ I aim to provide elegant, well-structured code and useful utilities that allow e
 | 07  | 	✅      |	✅ |
 | 08  | 	✅      |	✅ |
 | 09  | 	✅      |	✅ |
-| 10  | 	✅      |	⏳ |
+| 10  | 	✅      |	✅ |
 | 11  | 	⏳      |	⏳ |
 | 12  | 	⏳      |	⏳ |
 
@@ -87,6 +87,7 @@ I aim to provide elegant, well-structured code and useful utilities that allow e
 git clone https://github.com/pomopa/advent-of-code-2025.git
 cd advent-of-code-2025
 ```
+2. **To execute Day 10 gold star solution Ojango 56.1.1 must be installed**
 2. **Run from your favorite IDE or terminal**
 
 ---
