@@ -9,6 +9,7 @@ import days.day06.TrashCompactor;
 import days.day07.Laboratories;
 import days.day08.Playground;
 import days.day09.MovieTheater;
+import days.day10.Factory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +27,7 @@ public class SolverRegistry {
         solvers.put(7, new Laboratories());
         solvers.put(8, new Playground());
         solvers.put(9, new MovieTheater());
+        solvers.put(10, new Factory());
     }
 
     public static Solver get(int day) {
