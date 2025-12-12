@@ -13,14 +13,9 @@ public class TerminalUI {
     public static void start() {
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Day (1-25): ");
-        int day = sc.nextInt();
-
-        System.out.print("Dataset? (test/full): ");
-        String set = sc.next();
-
-        System.out.print("Part? (1=silver, 2=gold): ");
-        int part = sc.nextInt();
+        int day = SafeInput.readIntInRange(sc, "Day (1-12): ", 1, 12);
+        String set = SafeInput.readChoice(sc, "Dataset? (test/full): ", "test", "full");
+        int part = SafeInput.readIntInRange(sc, "Part? (1 = silver, 2 = gold): ", 1, 2);
 
         Solver solver = SolverRegistry.get(day);
 
