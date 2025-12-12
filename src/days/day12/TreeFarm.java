@@ -109,10 +109,9 @@ public class TreeFarm implements Solver {
 
     @Override
     public long solveGold(List<String> input) {
+        // It's the last problem, the gold implementation consisted in having all stars!
         return 0;
     }
-
-
 
 
     private static boolean[][] bufferToShape(List<String> buffer) {
