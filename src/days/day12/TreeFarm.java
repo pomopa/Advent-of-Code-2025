@@ -6,8 +6,28 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Solver for Day 12: Tree Farm problem.
+ * <p>
+ * Implements the {@link core.Solver} interface, providing solutions for Silver and Gold challenges.
+ * The problem involves placing tree-shaped blocks into rectangular regions while respecting constraints:
+ * - Silver: Count how many regions can be fully fitted with the given shapes.
+ * - Gold: Not implemented here (last problem, solution assumed to be achieving all stars).
+ * </p>
+ */
 public class TreeFarm implements Solver {
 
+    /**
+     * Solves the Silver variant of the Tree Farm problem.
+     * <p>
+     * Parses the input to read shapes and rectangular regions, computes all possible orientations
+     * of each shape (rotations and flips), and counts the number of regions that can be completely filled.
+     * </p>
+     *
+     * @param input list of strings defining shapes and regions. Shapes are given in '#' and '.' format.
+     *              Regions are given as "WxH: counts..." where counts correspond to the quantity of each shape.
+     * @return number of regions that can be successfully filled with the given shapes
+     */
     @Override
     public long solveSilver(List<String> input) {
         List<boolean[][]> shapes = new ArrayList<>();
@@ -107,13 +127,24 @@ public class TreeFarm implements Solver {
         return fitCount;
     }
 
+    /**
+     * Solves the Gold variant of the Tree Farm problem.
+     * <p>
+     * Not implemented; always returns 0.
+     * </p>
+     *
+     * @param input same input format as Silver
+     * @return 0
+     */
     @Override
     public long solveGold(List<String> input) {
         // It's the last problem, the gold implementation consisted in having all stars!
         return 0;
     }
 
-
+    /**
+     * Converts a list of strings representing a shape into a 2D boolean array and trims empty borders.
+     */
     private static boolean[][] bufferToShape(List<String> buffer) {
         int H = buffer.size();
         int W = buffer.get(0).length();
@@ -129,6 +160,9 @@ public class TreeFarm implements Solver {
         return trimShape(s);
     }
 
+    /**
+     * Removes empty borders from a shape.
+     */
     private static boolean[][] trimShape(boolean[][] s) {
         int H = s.length, W = s[0].length;
         int minX = W, minY = H, maxX = -1, maxY = -1;
@@ -154,6 +188,9 @@ public class TreeFarm implements Solver {
         return t;
     }
 
+    /**
+     * Counts the number of filled cells in a shape.
+     */
     private static int shapeArea(boolean[][] s) {
         int count = 0;
         for (boolean[] booleans : s)
@@ -162,6 +199,9 @@ public class TreeFarm implements Solver {
         return count;
     }
 
+    /**
+     * Generates all distinct orientations (rotations + horizontal flips) of a shape.
+     */
     private static List<int[]> generateOrientations(boolean[][] s) {
         Set<String> seen = new HashSet<>();
         List<int[]> out = new ArrayList<>();
@@ -199,6 +239,12 @@ public class TreeFarm implements Solver {
         return out;
     }
 
+    /**
+     * Rotates a shape 90 degrees clockwise.
+     *
+     * @param s the original 2D boolean array representing the shape
+     * @return a new 2D boolean array of the rotated shape
+     */
     private static boolean[][] rotate(boolean[][] s) {
         int H = s.length, W = s[0].length;
         boolean[][] r = new boolean[W][H];
@@ -206,6 +252,12 @@ public class TreeFarm implements Solver {
         return r;
     }
 
+    /**
+     * Flips a shape horizontally (mirror along vertical axis).
+     *
+     * @param s the original 2D boolean array representing the shape
+     * @return a new 2D boolean array of the flipped shape
+     */
     private static boolean[][] flipHorizontal(boolean[][] s) {
         int H = s.length, W = s[0].length;
         boolean[][] f = new boolean[H][W];
@@ -213,6 +265,14 @@ public class TreeFarm implements Solver {
         return f;
     }
 
+    /**
+     * Computes all possible placements of a given shape (with its orientations) within a grid of size WxH.
+     *
+     * @param orientations list of shape coordinates in different orientations
+     * @param W the width of the grid
+     * @param H the height of the grid
+     * @return list of placements, where each placement is an array of grid indices occupied by the shape
+     */
     private static List<int[]> computePlacementsForShape(List<int[]> orientations, int W, int H) {
         List<int[]> placements = new ArrayList<>();
         for (int[] ori : orientations) {
@@ -240,6 +300,15 @@ public class TreeFarm implements Solver {
         return placements;
     }
 
+    /**
+     * Recursively attempts to place all remaining pieces on the grid using backtracking.
+     *
+     * @param idx current index in the pieceOrder array
+     * @param pieceOrder array representing the order in which pieces are placed
+     * @param placementsByShape map from shape index to list of possible placements
+     * @param grid boolean array representing the occupied cells of the grid
+     * @return true if all pieces can be successfully placed; false otherwise
+     */
     private static boolean backtrackPlace(int idx, Integer[] pieceOrder, Map<Integer, List<int[]>> placementsByShape,
                                           boolean[] grid) {
         if (idx >= pieceOrder.length) return true; // all placed
@@ -257,6 +326,13 @@ public class TreeFarm implements Solver {
         return false;
     }
 
+    /**
+     * Checks if a set of cells can be placed on the grid without overlapping existing filled cells.
+     *
+     * @param cells array of grid indices representing the cells the shape would occupy
+     * @param grid boolean array representing the occupied cells of the grid
+     * @return true if all cells are free; false otherwise
+     */
     private static boolean canPlace(int[] cells, boolean[] grid) {
         for (int c : cells) {
             if (grid[c]) return false;
@@ -264,6 +340,13 @@ public class TreeFarm implements Solver {
         return true;
     }
 
+    /**
+     * Marks or unmarks a set of cells on the grid.
+     *
+     * @param cells array of grid indices to mark or unmark
+     * @param grid boolean array representing the occupied cells of the grid
+     * @param val true to mark cells as occupied, false to unmark
+     */
     private static void setPlace(int[] cells, boolean[] grid, boolean val) {
         for (int c : cells) grid[c] = val;
     }

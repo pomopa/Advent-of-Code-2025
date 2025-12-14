@@ -6,8 +6,29 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Solver for Day 04: Printing Department problem.
+ * <p>
+ * Implements the {@link core.Solver} interface, providing solutions for both
+ * Silver and Gold variants. The problem involves counting accessible rolls of paper
+ * in a 2D board according to specific adjacency rules.
+ * </p>
+ */
 public class PrintingDepartment implements Solver {
 
+    /**
+     * Determines whether a paper roll at the specified position is accessible.
+     * <p>
+     * A roll is considered accessible if there are at most 4 other rolls ('@') in its
+     * 3x3 neighborhood (including itself). Returns {@code false} if more than 4 rolls
+     * are adjacent.
+     * </p>
+     *
+     * @param line  the row index of the roll
+     * @param column the column index of the roll
+     * @param board  the 2D board as a list of character sequences
+     * @return {@code true} if the roll is accessible, {@code false} otherwise
+     */
     private boolean isAccessible(int line, int column, List<? extends CharSequence> board) {
         int count = 0;
         for (int l = line - 1; l <= line + 1; l++) {
@@ -22,6 +43,15 @@ public class PrintingDepartment implements Solver {
         return true;
     }
 
+    /**
+     * Solves the Silver variant of the Printing Department problem.
+     * <p>
+     * Counts all accessible rolls on the board without modifying the input.
+     * </p>
+     *
+     * @param input list of strings representing the 2D board
+     * @return the total number of accessible rolls for the Silver problem
+     */
     @Override
     public long solveSilver(List<String> input) {
         int n_lines = input.size();
@@ -38,6 +68,16 @@ public class PrintingDepartment implements Solver {
         return rolls;
     }
 
+    /**
+     * Solves the Gold variant of the Printing Department problem.
+     * <p>
+     * Simulates removing accessible rolls iteratively from the board until all rolls
+     * have been removed, counting each accessible roll removal as a "roll".
+     * </p>
+     *
+     * @param input list of strings representing the 2D board
+     * @return the total number of accessible rolls for the Gold problem
+     */
     @Override
     public long solveGold(List<String> input) {
         int n_lines = input.size();
