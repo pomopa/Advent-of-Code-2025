@@ -16,9 +16,18 @@ import days.day12.TreeFarm;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Registry for all problem solvers, mapping each day to its corresponding {@link Solver} implementation.
+ * <p>
+ * This class initializes a static map of solvers for days 1 through 12. Each day is associated
+ * with a specific solver class that implements the {@link Solver} interface.
+ * </p>
+ */
 public class SolverRegistry {
+    /** Map that stores the solver for each day. */
     private static final Map<Integer, Solver> solvers = new HashMap<>();
 
+    // Static initializer to populate the solvers map
     static {
         solvers.put(1, new SecretEntrance());
         solvers.put(2, new GiftShop());
@@ -34,6 +43,12 @@ public class SolverRegistry {
         solvers.put(12, new TreeFarm());
     }
 
+    /**
+     * Retrieves the solver associated with the specified day.
+     *
+     * @param day the day number for which to retrieve the solver
+     * @return the {@link Solver} for the given day, or {@code null} if no solver exists for that day
+     */
     public static Solver get(int day) {
         return solvers.get(day);
     }

@@ -5,7 +5,23 @@ import core.Solver;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Solver for Day 06: Trash Compactor problem.
+ * <p>
+ * Implements the {@link core.Solver} interface, providing solutions for both
+ * Silver and Gold variants. The problem involves performing arithmetic operations
+ * on columns of numbers with an operator specified in the input.
+ * </p>
+ */
 public class TrashCompactor implements Solver {
+
+    /**
+     * Applies the given operator ('+' or '*') to a list of numbers sequentially.
+     *
+     * @param numbers  list of numbers to operate on
+     * @param operator the operator character ('+' or '*')
+     * @return the result of applying the operator on all numbers
+     */
     private long applyOperator(List<Long> numbers, char operator) {
         long temp = numbers.get(0);
         for (int i = 1; i < numbers.size(); i++) {
@@ -17,6 +33,17 @@ public class TrashCompactor implements Solver {
         }
         return temp;
     }
+
+    /**
+     * Solves the Silver variant of the Trash Compactor problem.
+     * <p>
+     * Processes each column separately: collects all numbers from that column,
+     * applies the operator indicated at the bottom row, and sums the results.
+     * </p>
+     *
+     * @param input list of strings representing the problem input
+     * @return the total result for the Silver problem
+     */
     @Override
     public long solveSilver(List<String> input) {
         long result = 0;
@@ -42,6 +69,12 @@ public class TrashCompactor implements Solver {
         return result;
     }
 
+    /**
+     * Pads all input lines with spaces to ensure they have equal length.
+     *
+     * @param input list of input strings
+     * @return a new list of strings padded to equal length
+     */
     private List<String> padLinesToEqualLength(List<String> input) {
         int maxLength = input.stream()
                 .mapToInt(String::length)
@@ -60,6 +93,17 @@ public class TrashCompactor implements Solver {
         return paddedInput;
     }
 
+    /**
+     * Solves the Gold variant of the Trash Compactor problem.
+     * <p>
+     * Processes the input column by column from right to left, combining digits
+     * into numbers and applying operators as indicated in the last row. Supports
+     * numbers spanning multiple columns.
+     * </p>
+     *
+     * @param input list of strings representing the problem input
+     * @return the total result for the Gold problem
+     */
     @Override
     public long solveGold(List<String> input) {
         input = padLinesToEqualLength(input);

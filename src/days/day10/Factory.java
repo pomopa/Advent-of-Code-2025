@@ -12,8 +12,27 @@ import org.ojalgo.optimisation.Variable;
 import org.ojalgo.optimisation.Expression;
 import org.ojalgo.optimisation.Optimisation;
 
+/**
+ * Solver for Day 10: Factory problem.
+ * <p>
+ * Implements the {@link core.Solver} interface, providing solutions for both
+ * Silver and Gold problems. The problem involves optimizing machine operations:
+ * determining minimal button presses to achieve target lights configuration
+ * (Silver) or target joltage settings (Gold).
+ * </p>
+ */
 public class Factory implements Solver {
 
+    /**
+     * Solves the Silver variant of the Factory problem.
+     * <p>
+     * Iterates through each input line and computes the minimum number of button presses
+     * to achieve the target light configuration.
+     * </p>
+     *
+     * @param input list of strings, each describing a machine's lights and buttons
+     * @return the sum of minimal button presses across all machines
+     */
     @Override
     public long solveSilver(List<String> input) {
         long sum = 0;
@@ -21,6 +40,16 @@ public class Factory implements Solver {
         return sum;
     }
 
+    /**
+     * Solves the Gold variant of the Factory problem.
+     * <p>
+     * Iterates through each input line and computes the minimum number of button presses
+     * to achieve the target joltage configuration using integer linear programming.
+     * </p>
+     *
+     * @param input list of strings, each describing a machine's buttons and target joltages
+     * @return the sum of minimal button presses across all machines
+     */
     @Override
     public long solveGold(List<String> input) {
         long sum = 0;
@@ -28,6 +57,13 @@ public class Factory implements Solver {
         return sum;
     }
 
+    /**
+     * Solves the Gold variant for a single machine, computing the minimal button presses
+     * to reach the target joltage.
+     *
+     * @param line input string describing a machine's buttons and target joltages
+     * @return minimal number of button presses to achieve the target configuration
+     */
     private long solveMachineJoltage(String line) {
         int cb = line.indexOf('{');
         int ce = line.indexOf('}');
@@ -87,6 +123,13 @@ public class Factory implements Solver {
         return totalPresses;
     }
 
+    /**
+     * Solves the Silver variant for a single machine, computing the minimal number of button presses
+     * to reach the target lights configuration.
+     *
+     * @param line input string describing a machine's lights and button effects
+     * @return minimal number of button presses
+     */
     private int solveMachineLights(String line) {
         int lb = line.indexOf('[');
         int rb = line.indexOf(']');
