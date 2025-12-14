@@ -9,7 +9,25 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Terminal-based user interface for selecting and executing problem solvers.
+ * <p>
+ * This class interacts with the user through the console, prompting for the day,
+ * dataset type (test or full), and problem part (silver or gold). It reads the
+ * corresponding input file, executes the solver, displays the result and execution
+ * time, and logs the execution time to a file using {@link TimeLogger}.
+ * </p>
+ */
 public class TerminalUI {
+
+    /**
+     * Starts the terminal user interface.
+     * <p>
+     * Prompts the user for input, executes the appropriate solver for the selected
+     * day and part, prints the result and execution time, and logs the execution
+     * time to "logs/executionTime.log".
+     * </p>
+     */
     public static void start() {
         Scanner sc = new Scanner(System.in);
 
