@@ -8,6 +8,14 @@ I aim to provide elegant, well-structured code and useful utilities that allow e
 
 > ⚠️ **Important:** I strongly discourage anyone from viewing this repository before attempting their own solutions. Doing so would spoil the challenge and is considered bad practice. Please try the puzzles on your own first!
 
+## 📝 Table of Contents
+
+1. [Repository Structure](#-repository-structure)
+2. [Goals of This Repository](#-goals-of-this-repository)
+3. [How to Run](#-how-to-run)
+4. [Documentation](#-documentation)
+5. [License](#-license)
+
 ---
 
 ## 📁 Repository Structure
@@ -61,7 +69,7 @@ I aim to provide elegant, well-structured code and useful utilities that allow e
 
 ---
 
-## 🖥️ How to Run
+## 💻 How to Run
 
 1. **Clone the repository**
 
@@ -71,6 +79,15 @@ cd advent-of-code-2025
 ```
 2. **To execute Day 10 gold star solution Ojango 56.1.1 must be installed**
 2. **Run from your favorite IDE or terminal**
+
+---
+
+## 📖 Documentation
+
+The full Java API documentation for this project is available online:  
+[Advent of Code 2025 Javadoc](https://pomopa.github.io/Advent-of-Code-2025/)
+
+It includes descriptions for each class, method, and utility in the project.
 
 ---
 
