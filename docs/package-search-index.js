@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"core"},{"l":"days.day01"},{"l":"days.day02"},{"l":"days.day03"},{"l":"days.day04"},{"l":"days.day05"},{"l":"days.day06"},{"l":"days.day07"},{"l":"days.day08"},{"l":"days.day09"},{"l":"days.day10"},{"l":"days.day11"},{"l":"days.day12"},{"l":"ui"}];updateSearchResults();
